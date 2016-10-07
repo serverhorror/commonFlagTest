@@ -4,14 +4,20 @@ import (
 	"flag"
 	"fmt"
 	"os"
-"runtime"
+	"runtime"
 )
+
+var versionString string
 
 var (
-	version string
-
 	versionFlag = flag.Bool("version", false, "Print version and exit")
 )
+
+func init() {
+	if versionString == "" {
+		versionString = "<development>"
+	}
+}
 
 func Main() {
 	flag.Parse()
@@ -22,7 +28,7 @@ func Main() {
 }
 
 func PrintVersion() {
-	fmt.Printf("Version: %#q\n", version)
+	fmt.Printf("Version: %#q\n", versionString)
 	fmt.Printf("Runtime: %#q\n", runtime.Version())
-	os.Exit(1)
+	os.Exit(0)
 }
